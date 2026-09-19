@@ -1,50 +1,142 @@
 # PN Labs
 
-**Evidence-first tooling for reliable web retrieval.**
+**Independent code & architecture review for teams shipping faster with AI.**
 
-PN Labs builds small, auditable tools for scraper, crawler, browser-automation, and web-retrieval systems where reliability matters more than raw proxy count.
+I help find expensive problems **before they reach production**: logic defects, architecture drift, reliability failure modes, unsafe boundaries, hidden coupling, and AI-generated code that looks correct but is not yet trustworthy.
 
-Our working rule is simple:
+My default approach is simple:
 
-> **Observe first. Attribute carefully. Measure usable outcomes.**
+> **Evidence first. Reproduce when possible. Separate observation from inference. Fix the highest-impact risk first.**
 
-## Open-source toolkit
+## Commercial audit work
 
-### [`proxy-outcome`](https://github.com/pnlabs-dev/proxy-outcome)
+I am available for focused, independent review work such as:
 
-Deterministic HTTP/proxy outcome classification that avoids turning every `403`, `429`, `451`, timeout, or transport failure into an automatic “bad proxy” conclusion.
+| Engagement | What I look for |
+| --- | --- |
+| **Code audit** | Bugs, logic flaws, unsafe assumptions, edge cases, error handling, dead paths, maintainability risks |
+| **Architecture review** | Boundaries, coupling, contracts, state ownership, failure domains, scaling and recovery paths |
+| **AI-generated code QA** | Plausible-but-wrong code, missing invariants, hallucinated APIs, shallow tests, unsafe automation |
+| **Reliability audit** | Retry/failover behavior, partial failure, idempotency, timeouts, recovery, observability |
+| **Security-sensitive review** | Trust boundaries, input handling, secret exposure, unsafe mutation paths, fail-open behavior |
+| **Pre-release gate** | Independent bug hunt and risk review before merge, launch, migration, or handoff |
 
-- evidence-first attribution;
-- proxy-path vs endpoint-health separation;
-- local-only, zero runtime dependencies;
-- privacy-conscious public inputs and outputs.
+### Typical deliverable
 
-### [`proxybench`](https://github.com/pnlabs-dev/proxybench)
+A useful audit should not be a vague list of opinions. I aim to return:
 
-Local benchmarking for retrieval policies using operator-facing metrics such as:
+- **prioritized findings** by impact and likelihood;
+- exact **repository / file / behavior evidence**;
+- reproduction steps or adversarial cases where practical;
+- **logic and architecture flaws**, not only syntax or style issues;
+- blind spots and failure scenarios;
+- remediation options with trade-offs;
+- concrete next actions, including high-leverage fixes;
+- a clear distinction between **verified fact, inference, and unresolved risk**.
 
-- usable success rate;
-- requests per usable result;
-- rotations per usable result;
-- latency distribution;
-- cost per usable result.
+## How I work
 
-The goal is not to prove that “more proxies” are better. The goal is to measure whether a policy actually produces better usable outcomes.
+```text
+scope
+  ↓
+system boundaries + invariants
+  ↓
+repository / diff / runtime evidence
+  ↓
+bug hunt + adversarial reasoning
+  ↓
+architecture & failure-mode review
+  ↓
+risk prioritization
+  ↓
+actionable remediation
+  ↓
+verification
+```
 
-## Engineering principles
+I prefer small, testable claims over impressive-sounding conclusions.
 
-- **Evidence before attribution** — an HTTP status is an observation, not automatically a root cause.
-- **Usable-result first** — success is defined by the workload, not by proxy count or request count.
-- **Fail closed under ambiguity** — uncertain evidence stays uncertain instead of becoming a confident health signal.
-- **Data minimization** — public tooling should not require credentials, private endpoints, production captures, or customer data.
-- **Small, testable components** — classification, measurement, and control policy stay separable.
+Core principles:
 
-## What we are working on
+- **Evidence before confidence**
+- **KISS before accidental complexity**
+- **Fail closed when ambiguity is safety-relevant**
+- **Measure outcomes, not activity**
+- **Preserve clear ownership and contracts**
+- **Treat retries, recovery and partial failure as architecture**
+- **Use AI for leverage, not as proof of correctness**
 
-We are exploring integrations and design-partner benchmarks for legitimate, authorized web-retrieval workloads with measurable reliability problems: unstable proxy pools, blind rotation, mixed target/proxy failure attribution, and high requests-per-usable-result.
+## AI-era engineering
 
-If you have a reproducible workload or failure pattern that fits that scope, open a sanitized issue in the relevant repository. Please do not post credentials, private infrastructure details, raw production logs, or sensitive customer data.
+AI can accelerate implementation and analysis. It also makes it easier to generate code that is locally plausible while violating system-level assumptions.
+
+My workflow uses AI where it saves time—code navigation, hypothesis generation, test ideation, diff analysis and research—but important findings still need **human-verifiable evidence**.
+
+I am especially interested in auditing systems that were built quickly with AI assistance and now need an independent quality pass before they become expensive to change.
+
+## Selected public engineering work
+
+### [proxy-outcome](https://github.com/pnlabs-dev/proxy-outcome)
+
+Deterministic HTTP/proxy outcome classification designed to avoid false root-cause attribution.
+
+Relevant audit themes:
+
+- observation vs inference;
+- explicit ambiguity;
+- failure classification;
+- safe automated action boundaries;
+- zero-runtime-dependency design.
+
+### [proxybench](https://github.com/pnlabs-dev/proxybench)
+
+Local benchmarking for retrieval policies using operator-facing outcomes rather than vanity metrics.
+
+Relevant audit themes:
+
+- measurable success criteria;
+- policy comparison;
+- incomplete-data coverage;
+- cost / latency / reliability trade-offs;
+- avoiding unsupported causal claims.
+
+Additional private R&D covers reliability, recovery/security tooling, multi-module architecture governance and independent QA. Sensitive implementation details stay private; sanitized architecture or audit-style walkthroughs can be prepared when appropriate.
+
+## Best-fit problems
+
+I am most useful when:
+
+- a codebase grew faster than its architecture;
+- AI-assisted development increased delivery speed but confidence did not keep up;
+- a team needs a second opinion before release;
+- retries, failover or recovery behave unpredictably;
+- tests pass but important failure modes are still unproven;
+- multiple modules or teams disagree about contracts and ownership;
+- a refactor or migration needs risk discovery before implementation;
+- you want findings tied to evidence rather than generic best-practice advice.
+
+## Working style
+
+**Independent · evidence-driven · async-friendly · documentation-heavy when the risk justifies it.**
+
+I am comfortable reviewing code, architecture documents, Git history, pull requests, tests, failure reports and constrained runtime environments.
+
+Primary technical surfaces include **PHP, Python, TypeScript/JavaScript, web backends, APIs, CI/CD, reliability tooling, and AI-assisted engineering workflows**.
+
+## Commercial inquiries
+
+For a code or architecture audit, open a **sanitized** issue in this repository with:
+
+1. what the system does;
+2. what you are worried about;
+3. repository / stack size;
+4. whether the work is public or private;
+5. the decision or release you need confidence about.
+
+**Do not post credentials, production secrets, customer data, private infrastructure details, or proprietary source code in a public issue.**
+
+[Start a commercial audit inquiry →](https://github.com/pnlabs-dev/pnlabs-dev/issues/new)
 
 ---
 
-**PN Labs** · reliability tooling for web retrieval
+**PN Labs** · code audit · architecture review · reliability · AI-era engineering QA
